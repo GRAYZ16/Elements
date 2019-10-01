@@ -1,4 +1,5 @@
 # Elements
+[![Build Status](https://travis-ci.com/GRAYZ16/Elements.svg?token=ZVVMT9TUfZ5AyCRYJD4h&branch=master)](https://travis-ci.com/GRAYZ16/Elements)
 
 General purpose web application written in PHP for interfacing and controlling IOT devices.
 
