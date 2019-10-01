@@ -3,13 +3,6 @@ php:
   - '7.0.33'
 
 before_script:
-- |
-  echo "TRAVIS_PHP_VERSION:" $TRAVIS_PHP_VERSION;
-  php -v;
-  php -r 'echo "PHP: ".PHP_VERSION."\n";';
-  if [ $(echo "$TRAVIS_PHP_VERSION >= 7.2" | bc -l) -eq 1 ]; then
-    echo using PHPUnit 7.5.2
-    curl -sSfL -o ~/.phpenv/versions/$TRAVIS_PHP_VERSION/bin/phpunit https://phar.phpunit.de/phpunit-7.5.2.phar;
-  fi
+- wget https://phar.phpunit.de/phpunit-6.5.phar
 
-script: phpunit tests
+script: php phpunit-6.5.phar tests
