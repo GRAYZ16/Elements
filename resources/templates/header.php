@@ -3,17 +3,11 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="./css/style.css">
     <title>Elements Dashboard</title>
   </head>
   <body>
 
-    <div id="header">
-    <h1>Simple Site</h1>
-    <ul class="nav global">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Devices</a></li>
-        <li><a href="#">Settings</a></li>
-    </ul>
-
-    </div>
+    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+      <a href="#" class="navbar-brand col-sm-3 col-md-2 mr-0">Elements</a>
+    </nav>

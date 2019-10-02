@@ -17,8 +17,14 @@
 
         require_once(TEMPLATES_PATH . "/header.php");
 
-        echo "<div id=\"container\">\n"
-           . "\t<div id=\"content\">\n";
+        echo "<div class=\"container-fluid\" >\n";
+        echo "\t<div class=\"row\">";
+
+       require_once(TEMPLATES_PATH . "/leftPanel.php");
+
+       echo "\t\t<main role=\"main\" class=\"col-md-9 ml-sm-auto col-lg-10 px-4\">\n";
+
+
 
         if (file_exists($contentFileFullPath)) {
             require_once($contentFileFullPath);
@@ -30,10 +36,10 @@
             require_once(TEMPLATES_PATH . "/error.php");
         }
 
-        // close content div
-        echo "\t</div>\n";
 
-        require_once(TEMPLATES_PATH . "/rightPanel.php");
+        echo "\t\t</main>\n";
+
+        echo "\t</div>\n";
 
         // close container div
         echo "</div>\n";
