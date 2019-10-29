@@ -10,5 +10,5 @@
   <body>
 
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-      <a href="#" class="navbar-brand col-sm-3 col-md-2 mr-0"><i class="fa fa-leaf" style="padding-right: 10px;"></i>Elements</a>
+      <a href="http://192.168.33.10/Elements/index.php?page=home" class="navbar-brand col-sm-3 col-md-2 mr-0"><i class="fa fa-leaf" style="padding-right: 10px;"></i>Elements</a>
     </nav>

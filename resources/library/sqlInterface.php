@@ -14,6 +14,8 @@
     private $_dbUser;
     private $_dbPass;
 
+    public $queryData;
+
     function __construct($dbHost, $dbName, $dbUser, $dbPass)
     {
       $this->_dbHost = $dbHost;
@@ -33,7 +35,13 @@
       pg_close($this->_conn);
     }
 
-    function query($queryString){
-        return pg_query($this->_conn, $queryString);
+    function query($queryString)
+    {
+      $this->queryData = pg_query($this->_conn, $queryString);
+    }
+
+    function queryParams(string $query, array $params)
+    {
+      $this->queryData = pg_query_params($this->_conn, $query, $params);
     }
   }

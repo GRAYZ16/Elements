@@ -8,8 +8,8 @@
 $config = array(
   "db" => array(
     "dbname" => "elements",
-    "username" => "root",
-    "password" => "root",
+    "username" => "elements",
+    "password" => "elements14",
     "host" => "localhost"
   ),
   "paths" => array(
