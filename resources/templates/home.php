@@ -7,7 +7,7 @@ include(LIBRARY_PATH . "/sqlInterface.php");
 
   $db = new SqlInterface($config["db"]["host"], $config["db"]["dbname"], $config["db"]["username"], $config["db"]["password"]);
   $db->connect();
-  $db->queryParams("SELECT version() WHERE $1;", array('TRUE'));
-  echo "<p>" . pg_fetch_result($db->queryData,0,0) . "</p>";
+  $db->queryParams("SELECT value FROM data WHERE index=$1 LIMIT 10;", array(1));
+  print_r($db->queryData);
 
  ?>

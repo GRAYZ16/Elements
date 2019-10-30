@@ -37,11 +37,18 @@
 
     function query($queryString)
     {
-      $this->queryData = pg_query($this->_conn, $queryString);
+      $resource = pg_query($this->_conn, $queryString);
+      $this->fetchData($resource);
     }
 
     function queryParams(string $query, array $params)
     {
-      $this->queryData = pg_query_params($this->_conn, $query, $params);
+      $resource = pg_query_params($this->_conn, $query, $params);
+      $this->fetchData($resource);
+    }
+
+    function fetchData($resource)
+    {
+      $this->queryData = pg_fetch_all($resource);
     }
   }
