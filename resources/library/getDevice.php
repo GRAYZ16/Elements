@@ -9,7 +9,7 @@
       $db->connect();
       $db->queryParams("SELECT * FROM device WHERE mac_address=$1;", array($addr));
 
-      echo '<h4><b> Device Name: </b>' . $db->queryData[0]['device_name'] . "</h4>";
+      echo '<p><b> Device Name: </b>' . $db->queryData[0]['device_name'] . "</p>";
       echo '<p><b> Device Description: </b>' . $db->queryData[0]['device_description'] . "</p>";
       echo '<p><b> Number of Sensors: </b>' . $db->queryData[0]['sensor_count'] . "</p>";
       echo '<p><b> Elements Node: </b>' . $db->queryData[0]['node_id'] . "</p>";
