@@ -11,6 +11,9 @@
         getDevice($_GET['addr']);
         break;
 
+      case 'export':
+        require_once(LIBRARY_PATH . "/exportData.php");
+
       case 'None':
         renderLayoutWithContentFile($page . ".php");
         break;

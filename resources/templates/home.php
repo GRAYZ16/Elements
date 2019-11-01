@@ -10,4 +10,6 @@ include(LIBRARY_PATH . "/sqlInterface.php");
   $db->queryParams("SELECT value FROM data WHERE index=$1 LIMIT 10;", array(1));
   print_r($db->queryData);
 
+  print_r(key($db->queryData));
+
  ?>

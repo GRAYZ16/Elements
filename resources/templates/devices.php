@@ -35,6 +35,7 @@ include(LIBRARY_PATH . "/sqlInterface.php");
       ...
     </div>
     <div class="modal-footer">
+      <a href="# "role="button" id='btnExport' class="btn btn-primary">Export Data</a>
       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
     </div>
   </div>
