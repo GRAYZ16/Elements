@@ -23,9 +23,13 @@ include(LIBRARY_PATH . "/sqlInterface.php");
     $db->queryParams(  "select datetime from (select mac_address, datetime, row_number() over(partition by mac_address order by datetime desc) as rn from data) t where t.rn = 1 AND mac_address=$1;"
       , array($row['mac_address']));
 
-    $date = DateTime::createFromFormat('Y-m-d H:i:s.u', $db->queryData[0]['datetime']);
+    $date = strtotime($db->queryData[0]['datetime']);
 
-    if($date < date('Y-m-d', strtotime('-1 day', strtotime(date('Y-m-d')))) && ! is_null($db->queryData[0]['datetime']))
+    print_r(var_dump($date));
+    print_r(var_dump(strtotime('-1 day', strtotime(date('Y-m-d H:i:s.u')))));
+    print_r(var_dump($date > strtotime('-1 day', strtotime(date('Y-m-d H:i:s.u')))));
+
+    if($date > strtotime('-1 day', strtotime(date('Y-m-d H:i:s.u'))) && ! is_null($db->queryData[0]['datetime']))
     {
       echo '<span style="color: transparent;  text-shadow: 0 0 0 lightgreen; ">&#9899;</span>';
     }
