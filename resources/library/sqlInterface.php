@@ -14,6 +14,8 @@
     private $_dbUser;
     private $_dbPass;
 
+    public $queryData;
+
     function __construct($dbHost, $dbName, $dbUser, $dbPass)
     {
       $this->_dbHost = $dbHost;
@@ -33,7 +35,20 @@
       pg_close($this->_conn);
     }
 
-    function query($queryString){
-        return pg_query($this->_conn, $queryString);
+    function query($queryString)
+    {
+      $resource = pg_query($this->_conn, $queryString);
+      $this->fetchData($resource);
+    }
+
+    function queryParams(string $query, array $params)
+    {
+      $resource = pg_query_params($this->_conn, $query, $params);
+      $this->fetchData($resource);
+    }
+
+    function fetchData($resource)
+    {
+      $this->queryData = pg_fetch_all($resource);
     }
   }

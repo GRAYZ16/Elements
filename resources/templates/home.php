@@ -5,11 +5,11 @@
 require(dirname(__DIR__, 1)."/config.php");
 include(LIBRARY_PATH . "/sqlInterface.php");
 
-if(isset($config))
-{
   $db = new SqlInterface($config["db"]["host"], $config["db"]["dbname"], $config["db"]["username"], $config["db"]["password"]);
   $db->connect();
-  echo "<p>" . pg_fetch_result($db->query("SELECT version();"),0,0) . "</p>";
-}
+  $db->queryParams("SELECT value FROM data WHERE index=$1 LIMIT 10;", array(1));
+  print_r($db->queryData);
+
+  print_r(key($db->queryData));
 
  ?>
