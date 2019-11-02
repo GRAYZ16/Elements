@@ -25,10 +25,6 @@ include(LIBRARY_PATH . "/sqlInterface.php");
 
     $date = strtotime($db->queryData[0]['datetime']);
 
-    print_r(var_dump($date));
-    print_r(var_dump(strtotime('-1 day', strtotime(date('Y-m-d H:i:s.u')))));
-    print_r(var_dump($date > strtotime('-1 day', strtotime(date('Y-m-d H:i:s.u')))));
-
     if($date > strtotime('-1 day', strtotime(date('Y-m-d H:i:s.u'))) && ! is_null($db->queryData[0]['datetime']))
     {
       echo '<span style="color: transparent;  text-shadow: 0 0 0 lightgreen; ">&#9899;</span>';
@@ -57,6 +53,7 @@ include(LIBRARY_PATH . "/sqlInterface.php");
       ...
     </div>
     <div class="modal-footer">
+      <a href="# "role="button" id='btnReport' class="btn btn-primary">Device Report</a>
       <a href="# "role="button" id='btnExport' class="btn btn-primary">Export Data</a>
       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
     </div>
