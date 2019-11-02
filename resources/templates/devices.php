@@ -8,7 +8,10 @@ include(LIBRARY_PATH . "/sqlInterface.php");
   $db->connect();
   $db->queryParams("SELECT * FROM device WHERE node_id=$1;", array(1));
 
-  foreach ($db->queryData as $row)
+  $deviceData = $db->queryData;
+
+
+  foreach ($deviceData as $row)
   {
     echo '<div id="' . $row['device_name'] . '"class="card" data-toggle="modal" data-target="#infoModal" data-source="#' . $row['device_name'] . '"style="width: 15rem">';
     echo '<div class="card-body">';
@@ -16,6 +19,22 @@ include(LIBRARY_PATH . "/sqlInterface.php");
     echo "\t<p class='card-subtitle'>". $row['mac_address'] ."</p>";
     echo "\t<p class='card-text overflow device-description'>". $row['device_description'] ."</p>";
     echo "\t<p class='card-text'><b>Sensors: </b>". $row['sensor_count'] ."</p>";
+
+    $db->queryParams(  "select datetime from (select mac_address, datetime, row_number() over(partition by mac_address order by datetime desc) as rn from data) t where t.rn = 1 AND mac_address=$1;"
+      , array($row['mac_address']));
+
+    $date = date_create_from_format('Y-m-d H:i:s', $db->queryData[0]['datetime']);
+
+    if($date > date('Y-m-d', strtotime('-1 day', strtotime($date))))
+    {
+      echo '<span style="color: transparent;  text-shadow: 0 0 0 green; ">&#9899;</span>';
+    }
+    else
+    {
+      echo '<span style="color: transparent;  text-shadow: 0 0 0 darkred; ">&#9899;</span>';
+    }
+
+
     echo "</div>";
     echo "</div>";
   }
