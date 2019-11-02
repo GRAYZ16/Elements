@@ -14,7 +14,7 @@ include(LIBRARY_PATH . "/sqlInterface.php");
     echo '<div class="card-body">';
     echo "\t<h4 class='card-title overflow'>".  $row['device_name'] ."</h4>";
     echo "\t<p class='card-subtitle'>". $row['mac_address'] ."</p>";
-    echo "\t<p class='card-text overflow'>". $row['device_description'] ."</p>";
+    echo "\t<p class='card-text overflow device-description'>". $row['device_description'] ."</p>";
     echo "\t<p class='card-text'><b>Sensors: </b>". $row['sensor_count'] ."</p>";
     echo "</div>";
     echo "</div>";

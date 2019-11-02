@@ -22,7 +22,7 @@
 
        require_once(TEMPLATES_PATH . "/leftPanel.php");
 
-       echo "\t\t<main role=\"main\" class=\"col-md-9 ml-sm-auto col-lg-10 px-4\">\n";
+       echo "\t\t<main role=\"main\" class=\"col-md-9 ml-sm-auto col-sm-10 col-lg-10 px-4\">\n";
 
 
 
