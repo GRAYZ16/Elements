@@ -1,6 +1,12 @@
 $('#infoModal').on('show.bs.modal', function (e) {
   var $invoker = $(e.relatedTarget);
-  getDevice($invoker.children("div").children("p.card-subtitle").html());
+
+  var mac_address = $invoker.children("div").children("p.card-subtitle").html();
+
+  $('#btnExport').attr("href", "index.php?request=export&addr=" + mac_address);
+  $('#btnReport').attr("href", "index.php?page=deviceReport&addr=" + mac_address);
+
+  getDevice(mac_address);
 });
 
 function getDevice(str) {
