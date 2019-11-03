@@ -7,7 +7,7 @@
 
 $config = array(
   "db" => array(
-    "dbname" => "elements",
+    "dbname" => "postgres",
     "username" => "elements",
     "password" => "elements14",
     "host" => "localhost"
