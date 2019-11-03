@@ -1,62 +1,77 @@
-<!-- content -->
-<head>
-  <meta charset="utf-8">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.js"></script>
-  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
-  <script type="text/javascript" src="https://cdn.rawgit.com/eligrey/canvas-toBlob.js/master/canvas-toBlob.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/javascript.util/0.12.12/javascript.util.min.js"></script>
-
-  <h2 id="deviceName"> Device Name </h2>
-  <body>
-  </body>
-
-
-  <div id = "c1" style="display: none; width:50%; float:left;">
-    <canvas id="mycanvas1"></canvas>
-    <button id="save1" type="button">Save</button>
-    <button id="line1" type="button">Line Graph</button>
-    <button id="bar1" type="button">Bar Graph</button>
-
-  </div>
-
-
-  <div id = "c2" style="display: none; width:50%; float:right;">
-    <canvas id="mycanvas2"></canvas>
-    <button id="save2" type="button">Save</button>
-    <button id="line2" type="button">Line Graph</button>
-    <button id="bar2" type="button">Bar Graph</button>
-  </div>
-
-  <div id = "c3" style="display: none; width:50%; float:left;">
-    <canvas id="mycanvas3"></canvas>
-    <button id="save3" type="button">Save</button>
-    <button id="line3" type="button">Line Graph</button>
-    <button id="bar3" type="button">Bar Graph</button>
-  </div>
-
-    <div id = "c4" style="display: none; width:50%; float:right;">
-      <canvas id="mycanvas4"></canvas>
-      <button id="save4" type="button">Save</button>
-      <button id="line4" type="button">Line Graph</button>
-      <button id="bar4" type="button">Bar Graph</button>
-    </div>
-
-</head>
-
 <?php
-require(dirname(__DIR__, 1)."/config.php");
-include(LIBRARY_PATH . "/sqlInterface.php");
-//require_once(LIBRARY_PATH . "/getSensor.php");
-
+  require(dirname(__DIR__, 1)."/config.php");
+  include(LIBRARY_PATH . "/sqlInterface.php");
+  include(LIBRARY_PATH . "/getData.php");
   $db = new SqlInterface($config["db"]["host"], $config["db"]["dbname"], $config["db"]["username"], $config["db"]["password"]);
   $db->connect();
-  $db->queryParams("SELECT value FROM data WHERE index=$1 LIMIT 10;", array(1));
-  //print_r($db->queryData);
 
-  // Controls what device to show!
-  $addr = 'dc:4f:22:1d:a6:ce';
+  if(isset($_GET))
+  {
+    if(!empty($_GET['device']))
+    {
+      $addr = $_GET['device'];
+      $startTime = $_GET['startTime'];
+      $endTime = $_GET['endTime'];
+    }
+  }
 
+ ?>
+
+<h1>Elements Dashboard <small class="text-muted">(Node 1)</small></h1>
+<div style='margin: 50px;'>
+  <div id = "c1" style="display: none; width:50%; float:left; padding-bottom: 50px">
+    <canvas id="mycanvas1"></canvas>
+    <button id="save1" class="btn btn-primary" type="button">Save</button>
+    <button id="line1" class="btn btn-secondary" type="button">Line Graph</button>
+    <button id="bar1" class="btn btn-secondary" type="button">Bar Graph</button>
+  </div>
+  <div id = "c2" style="display: none; width:50%; float:right; padding-bottom: 50px">
+    <canvas id="mycanvas2"></canvas>
+    <button id="save2" class="btn btn-primary" type="button">Save</button>
+    <button id="line2" class="btn btn-secondary" type="button">Line Graph</button>
+    <button id="bar2" class="btn btn-secondary" type="button">Bar Graph</button>
+  </div>
+
+  <div id = "c3" style="display: none; width:50%; float:left; padding-bottom: 50px">
+    <canvas id="mycanvas3"></canvas>
+    <button id="save3" class="btn btn-primary" type="button">Save</button>
+    <button id="line3" class="btn btn-secondary" type="button">Line Graph</button>
+    <button id="bar3" class="btn btn-secondary" type="button">Bar Graph</button>
+  </div>
+
+    <div id = "c4" style="display: none; width:50%; float:right; padding-bottom: 50px">
+      <canvas id="mycanvas4"></canvas>
+      <button id="save4" class="btn btn-primary" type="button">Save</button>
+      <button id="line4" class="btn btn-secondary" type="button">Line Graph</button>
+      <button id="bar4" class="btn btn-secondary" type="button">Bar Graph</button>
+    </div>
+
+</div>
+
+<form action="index.php">
+  <select name="device" class="form-control">
+    <option>Default select</option>
+    <?php
+
+    $db->queryParams("SELECT mac_address, device_name FROM device WHERE node_id=$1;", array(1));
+
+    foreach ($db->queryData as $row)
+    {
+      echo '<option value="' . $row['mac_address'] . '">';
+      echo $row['device_name'] . '(' . $row['mac_address'] . ')';
+      echo '</option>';
+    }
+     ?>
+  </select>
+  Graph Start Time:
+  <input type="datetime-local" class="datetime-local" name="startTime">
+  Graph End Time:
+  <input type="datetime-local" class="datetime-local" name="endTime">
+  <input type="submit" value="Generate">
+  <input type="hidden" name='page', value='home'>
+</form>
+
+<?php
 
   $db->queryParams("SELECT device_name, sensor_count FROM device WHERE mac_address=$1;", array($addr));
 
@@ -66,15 +81,13 @@ include(LIBRARY_PATH . "/sqlInterface.php");
 // For each sensor in the device mac adress loop through (generate this many graphs)
   for ($i = 0; $i <= $sensorCount-1; $i++){
 
-    // SELECT date time and value from data for sensor (loops through each sensor)
-    $db->queryParams("SELECT datetime, value  FROM data WHERE mac_address=$1 AND index = $i;", array($addr));
-
-
     // Encode into $myJSON json format
-    $myJSON[$i] = json_encode($db->queryData);
+    $myJSON[$i] = json_encode(getSensorDataAsJSON($addr, $i, $startTime, $endTime));
     //print_r($db->queryData[0]);
   };
  ?>
+
+
 
 <script>
 // Setup Number of sensors for a device
@@ -82,7 +95,6 @@ var sensorLength = <?php echo $sensorCount ?>;
 
 // Setup Device Name of Page
 var sensorName = <?php echo "'$sensorName'" ?>;
-document.getElementById("deviceName").innerHTML = sensorName;
 
 // Loop for however many sensors the device has
  for (var i = 0; i < sensorLength+1; i++){
