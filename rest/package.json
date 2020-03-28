@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/GRAYZ16/Elements/issues"
   },
-  "homepage": "https://github.com/GRAYZ16/Elements#readme"
+  "homepage": "https://github.com/GRAYZ16/Elements#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
