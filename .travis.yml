@@ -10,7 +10,7 @@ before_install:
     - docker build -t elements-rest .
     - docker run -dp 8080:8080 elements-rest
     - docker ps -a
-    - docker run elements-rest /bin/sh -c "npm test"
+    - docker run elements-rest /bin/sh -c "cd rest; npm test"
 
 script:
   - npm test
