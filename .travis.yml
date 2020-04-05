@@ -7,7 +7,6 @@ services:
     - docker
 
 before_install:
-    - cd rest
     - docker build -t elements-rest .
     - docker run -dp 8080:8080 elements-rest
     - docker ps -a
