@@ -2,7 +2,7 @@
   "name": "elements",
   "version": "1.0.0",
   "description": "Elements REST API",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"No test specified\" && exit 0"
   },
