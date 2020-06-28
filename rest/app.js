@@ -1,9 +1,12 @@
-const express = require('express')
+const config = require('./config/config');
+const { Connection } = require('./config/mongo-connection');
+const assert = require('assert');
 
-const app = express()
-const port = 8080
-const hostname = '0.0.0.0'
+const express = require('express');
 
+
+Connection.connectToMongo();
+const app = express();
 var routes = require('./routes.js')(app);
 
-app.listen(port, hostname, () => console.log(`App running on http://${hostname} listening on port ${port}`))
+app.listen(config.server.port, config.server.hostname, () => console.log(`App running on http://${config.server.hostname} listening on port ${config.server.port}`));
