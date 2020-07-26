@@ -5,7 +5,7 @@ const MongoClient = require('mongodb').MongoClient;
 class Connection {
     static connectToMongo() {
         if ( this.db ) return Promise.resolve(this.db);  
-        MongoClient.connect(this.url, function (err, db) {
+        MongoClient.connect(this.url.concat('/', this.DB_NAME), function (err, db) {
             assert.equal(null, err);
             Connection.db = db.db('elements');
         });
@@ -14,8 +14,8 @@ class Connection {
 }
 
 Connection.db = null;
-Connection.url = 'mongodb://192.168.0.3:27017/elements';
-Connection.db_name = 'elements';
+Connection.url = mongodb.URL;
+Connection.db_name = mongodb.DB_NAME;
 Connection.options = {
     bufferMaxEntries:   0,
     reconnectTries:     5000,
