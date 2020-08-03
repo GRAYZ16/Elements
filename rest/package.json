@@ -18,6 +18,7 @@
   "homepage": "https://github.com/GRAYZ16/Elements#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "mongodb": "^3.5.9"
+    "mongodb": "^3.5.9",
+    "mongoose": "^5.9.27"
   }
 }
