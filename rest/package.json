@@ -4,7 +4,8 @@
   "description": "Elements REST API",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"No test specified\" && exit 0"
+    "test": "echo \"No test specified\" && exit 0",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",

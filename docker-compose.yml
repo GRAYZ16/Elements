@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  rest:
+    build: .
+    command: nodemon -L --inspect=0.0.0.0:5858
+    volumes:
+      - ./rest:/elements
+    ports:
+      - "8080:8080"
+      - "5858:5858"

@@ -23,7 +23,42 @@ exports.getDevice = function(req, res)
 
 exports.queryDevices = function(req, res)
 {
+    for (const key in req.query) 
+    {
+        switch (key) {
+            case 'contains':
+                var searchString = req.query[key];
+                
+                Connection.db.collection('Devices').find({deviceName: new RegExp(searchString, 'g')}).toArray(function(e, result) {
+                    if(e)
+                    {
+                        res.statusCode = 500;
+                        res.json({err: e});
+                    }
+                    else
+                    {
+                        res.json(result);
+                    }
+                });
+                break;
 
+            case 'id':
+
+                break;
+
+            case 'startsWith':
+
+                break;
+
+            case 'endsWith':
+
+                break;
+        
+            default:
+                res.send("None");
+                break;
+        }
+    }
 };
 
 
