@@ -2,6 +2,7 @@ FROM node:8.2.1-alpine AS development
 
 WORKDIR /elements/rest
 
+RUN npm config set unsafe-perm true
 RUN npm install -g nodemon@1.11.0
 
 COPY package.json /elements/rest/package.json
