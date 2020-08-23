@@ -1,12 +1,14 @@
-version: "3"
+version: "3.5"
 
 services:
   rest:
-    build: ./rest
+    build: 
+      context: ./rest
+      target: development
     image: rest:api
-    command: nodemon -L --inspect=0.0.0.0:5858 ./app.js
+    command: npm run development
     volumes:
-      - ./rest:/elements/rest
+      - ./rest/src:/elements/rest/src
     ports:
       - "8080:8080"
       - "5858:5858"

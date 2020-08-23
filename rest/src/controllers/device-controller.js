@@ -12,7 +12,7 @@ exports.getDevice = function(req, res)
         else if (result.length != 1)
         {
             res.statusCode = 404;
-            res.json({err: "The Requested Device ID cant be found."});
+            res.json({err: "The Requested Device ID cannot be found."});
         }
         else
         {

@@ -2,10 +2,11 @@
   "name": "elements",
   "version": "1.0.0",
   "description": "Elements REST API",
-  "main": "app.js",
+  "main": "./src/app.js",
   "scripts": {
     "test": "echo \"No test specified\" && exit 0",
-    "start": "node app.js"
+    "start": "node ./src/app.js",
+    "development": "nodemon -L --inspect=0.0.0.0:5858 ./src/app.js"
   },
   "repository": {
     "type": "git",
