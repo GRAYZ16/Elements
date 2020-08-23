@@ -8,8 +8,8 @@ services:
 
 before_install:
     - docker build --target development -t elements-rest:development ./rest
-    - docker run -dp 8080:8080 elements-rest
+    - docker run -dp 8080:8080 elements-rest:development
     - docker ps -a
 
 script:
-  - docker run elements-rest /bin/sh -c "cd rest; npm test"
+  - docker run elements-rest:development /bin/sh -c "cd rest; npm test"
