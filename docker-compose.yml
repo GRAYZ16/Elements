@@ -2,9 +2,9 @@ version: "3"
 
 services:
   rest:
-    build: .
+    build: ./rest
     image: rest:api
-    command: nodemon  -L --inspect=0.0.0.0:5858 ./rest/app.js
+    command: nodemon -L --inspect=0.0.0.0:5858 ./app.js
     volumes:
       - ./rest:/elements/rest
     ports:
