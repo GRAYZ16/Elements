@@ -1,8 +1,15 @@
-language: php
-php:
-  - '7.0.33'
+language: node_js
 
-before_script:
-- wget https://phar.phpunit.de/phpunit-6.5.phar
+node_js:
+  - 7
 
-script: php phpunit-6.5.phar tests
+services:
+    - docker
+
+before_install:
+    - docker build --target development -t elements-rest:development ./rest
+    - docker run -dp 8080:8080 elements-rest:development
+    - docker ps -a
+
+script:
+  - docker run elements-rest:development /bin/sh -c "cd rest; npm test"
