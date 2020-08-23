@@ -1,0 +1,26 @@
+{
+  "name": "elements",
+  "version": "1.0.0",
+  "description": "Elements REST API",
+  "main": "./src/app.js",
+  "scripts": {
+    "test": "echo \"No test specified\" && exit 0",
+    "start": "node ./src/app.js",
+    "development": "nodemon -L --inspect=0.0.0.0:5858 ./src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GRAYZ16/Elements.git"
+  },
+  "author": "Joshua Gray",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GRAYZ16/Elements/issues"
+  },
+  "homepage": "https://github.com/GRAYZ16/Elements#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongodb": "^3.5.9",
+    "mongoose": "^5.9.27"
+  }
+}

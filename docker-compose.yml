@@ -1,0 +1,14 @@
+version: "3.5"
+
+services:
+  rest:
+    build: 
+      context: ./rest
+      target: development
+    image: rest:api
+    command: npm run development
+    volumes:
+      - ./rest/src:/elements/rest/src
+    ports:
+      - "8080:8080"
+      - "5858:5858"
