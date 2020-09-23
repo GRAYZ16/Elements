@@ -4,7 +4,7 @@
   "description": "Elements REST API",
   "main": "./src/app.js",
   "scripts": {
-    "test": "echo \"No test specified\" && exit 0",
+    "test": "mocha",
     "start": "node ./src/app.js",
     "development": "nodemon -L --inspect=0.0.0.0:5858 ./src/app.js"
   },
@@ -22,5 +22,8 @@
     "express": "^4.17.1",
     "mongodb": "^3.5.9",
     "mongoose": "^5.9.27"
+  },
+  "devDependencies": {
+    "mocha": "^8.1.3"
   }
 }
