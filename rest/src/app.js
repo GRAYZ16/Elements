@@ -1,9 +1,7 @@
 const { server } = require('./config/config');
 const { Connection } = require('./config/mongo-connection');
-const assert = require('assert');
 
 const express = require('express');
-
 
 Connection.connectToMongo();
 const app = express();

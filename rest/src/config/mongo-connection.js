@@ -1,14 +1,19 @@
-const assert = require('assert');
 const { mongodb } = require('./config');
-const MongoClient = require('mongodb').MongoClient;
+const mongoose = require('mongoose');
 
 class Connection {
     static connectToMongo() {
         if ( this.db ) return Promise.resolve(this.db);  
-        MongoClient.connect(this.url.concat('/', this.DB_NAME), function (err, db) {
-            assert.equal(null, err);
-            Connection.db = db.db('elements');
+        mongoose.connect(this.url.concat('/', this.DB_NAME), {useNewUrlParser: true});
+
+        this.db = mongoose.connection;
+
+        this.db.on('error', console.error.bind(console, 'connection error: '));
+
+        this.db.once('open', function() {
+            console.log('REST bound to mongodb');
         });
+
         return this.db;
     }
 }
