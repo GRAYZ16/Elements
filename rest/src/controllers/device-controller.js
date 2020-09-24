@@ -1,24 +1,22 @@
 const { Connection } = require('../config/mongo-connection');
+const mongoose = require('mongoose');
+
+const DeviceModel = require('../models/device');
+
 
 exports.getDevice = function(req, res)
 {
-    Connection.db.collection('Devices').find({id: parseInt(req.params.deviceId)}).toArray(function (e, result) {
-
-        if (e) 
+    DeviceModel.findById(req.params.deviceId, function (err, device) {
+        if (err)
         {
             res.statusCode = 500;
-            res.json({err: e});
-        }
-        else if (result.length != 1)
-        {
-            res.statusCode = 404;
-            res.json({err: "The Requested Device ID cannot be found."});
+            res.json(err);
         }
         else
         {
-            res.json(result[0]);
-        }    
-      });
+            res.json(device);
+        }
+    });
 };
 
 exports.queryDevices = function(req, res)

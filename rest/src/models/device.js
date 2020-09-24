@@ -26,6 +26,6 @@ var DeviceSchema = new mongoose.Schema({
     sensors: [SensorSchema]
 });
 
-const DeviceModel = new mongoose.model("Device", DeviceSchema);
+const DeviceModel = new mongoose.model("Device", DeviceSchema, "Devices");
 
 module.exports = DeviceModel;
