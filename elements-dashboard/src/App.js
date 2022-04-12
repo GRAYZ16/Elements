@@ -1,4 +1,6 @@
 import React, {Component} from 'react'
+import TopBar from './components/TopBar';
+import NavBar from './components/NavBar';
 
 class App extends Component {
     
@@ -7,7 +9,8 @@ class App extends Component {
       return (
         <div className="App">
           <h1>Hello, React</h1>
-          <p>Does Auto update work</p>
+          <TopBar />
+          <NavBar />
         </div>
       )
 
